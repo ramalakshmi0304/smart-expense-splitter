@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '../services/supabase';
 import { useNavigate } from 'react-router-dom';
 import { Users, ChevronRight, LayoutGrid, Plus, X } from 'lucide-react';
-import CreateGroup from '../components/CreateGroup';
+import CreateGroup from "../components/CreateGroup"
 
 const Home = () => {
   const [groups, setGroups] = useState([]);
@@ -40,7 +40,7 @@ const Home = () => {
         {/* Toggle Button */}
         <button 
           onClick={() => setShowCreate(!showCreate)}
-          className={`₹{
+          className={`${
             showCreate ? 'bg-slate-800 text-slate-400' : 'bg-blue-600 text-white'
           } hover:scale-105 px-5 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2`}
         >
@@ -59,7 +59,7 @@ const Home = () => {
           {groups.map((group) => (
             <div
               key={group.id}
-              onClick={() => navigate(`/group/₹{group.id}`)}
+              onClick={() => navigate(`/group/${group.id}`)}
               className="group relative p-6 bg-slate-900/40 border border-slate-800 hover:border-blue-500/50 rounded-3xl cursor-pointer transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10"
             >
               <div className="flex justify-between items-start mb-4">

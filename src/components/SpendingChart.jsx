@@ -45,7 +45,7 @@ const SpendingChart = ({ expenses, members }) => {
             dataKey="value"
           >
             {chartData.map((entry, index) => (
-              <Cell key={`cell-₹{index}`} fill={COLORS[index % COLORS.length]} stroke="none" />
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} stroke="none" />
             ))}
           </Pie>
           <Tooltip 

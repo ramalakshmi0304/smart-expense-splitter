@@ -79,7 +79,7 @@ const ExpenseList = ({ expenses, members, onDelete }) => {
             {/* Right Side: Amount & Actions */}
             <div className="flex items-center gap-4">
               <div className="text-right">
-                <p className="text-lg font-bold text-white">₹{Number(expense.amount).toFixed(2)}</p>
+                <p className="text-lg font-bold text-white">${Number(expense.amount).toFixed(2)}</p>
                 <p className="text-[10px] text-slate-500 uppercase tracking-wider">
                   {new Date(expense.created_at).toLocaleDateString()}
                 </p>
