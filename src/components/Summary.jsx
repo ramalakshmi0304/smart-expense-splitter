@@ -31,19 +31,19 @@ const generateInsights = (expenses) => {
   if (prevWeekTotal > 0) {
     const diff = ((thisWeekTotal - prevWeekTotal) / prevWeekTotal) * 100;
     insight = diff > 0
-      ? `Spending is up ${diff.toFixed(0)}% this week. `
-      : `Spending is down ${Math.abs(diff).toFixed(0)}%! `;
+      ? `Spending is up ₹{diff.toFixed(0)}% this week. `
+      : `Spending is down ₹{Math.abs(diff).toFixed(0)}%! `;
   }
 
   if (topCategory) {
-    insight += `Most of your budget is going toward "${topCategory[0]}".`;
+    insight += `Most of your budget is going toward "₹{topCategory[0]}".`;
   }
 
   return insight || "You're off to a great start tracking shared costs!";
 };
 
 // NOTE: We use onDeleteGroup (the prop) instead of a local function
-const Summary = ({ members, expenses, onDeleteGroup,groupId }) => {
+const Summary = ({ members, expenses, onDeleteGroup, groupId }) => {
   const balances = useMemo(() => calculateBalances(members, expenses), [members, expenses]);
   const settlements = useMemo(() => getSettlements(balances), [balances]);
   const aiInsight = useMemo(() => generateInsights(expenses), [expenses]);
@@ -51,7 +51,7 @@ const Summary = ({ members, expenses, onDeleteGroup,groupId }) => {
   return (
     <div className="space-y-8">
       <SpendingChart expenses={expenses} members={members} />
-      
+
       {/* Member Status Section */}
       <section>
         <h3 className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mb-4 ml-1">Member Status</h3>
@@ -59,13 +59,13 @@ const Summary = ({ members, expenses, onDeleteGroup,groupId }) => {
           {balances.map((user) => (
             <div key={user.id} className="flex items-center justify-between p-4 bg-slate-900/40 border border-slate-800/50 rounded-2xl">
               <div className="flex items-center gap-3">
-                <div className={`p-2 rounded-lg ${user.amount >= 0 ? 'bg-emerald-500/10' : 'bg-red-500/10'}`}>
+                <div className={`p-2 rounded-lg ₹{user.amount >= 0 ? 'bg-emerald-500/10' : 'bg-red-500/10'}`}>
                   {user.amount >= 0 ? <TrendingUp size={16} className="text-emerald-400" /> : <TrendingDown size={16} className="text-red-400" />}
                 </div>
                 <span className="font-medium text-slate-200">{user.name}</span>
               </div>
-              <span className={`font-mono font-bold ${user.amount >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                {user.amount >= 0 ? '+' : ''}${Math.abs(user.amount).toFixed(2)}
+              <span className={`font-mono font-bold ₹{user.amount >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                {user.amount >= 0 ? '+' : ''}₹{Math.abs(user.amount).toFixed(2)}
               </span>
             </div>
           ))}
@@ -88,7 +88,8 @@ const Summary = ({ members, expenses, onDeleteGroup,groupId }) => {
                   <ArrowRight size={14} className="text-slate-600" />
                   <span className="text-white font-semibold">{s.to}</span>
                 </div>
-                <span className="text-blue-400 font-bold">${s.amount}</span>
+                {/* Change this line */}
+                <span className="text-blue-400 font-bold">₹{s.amount}</span>
               </div>
             ))
           )}

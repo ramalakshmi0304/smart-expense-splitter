@@ -15,8 +15,8 @@ export const generateInsights = (expenses) => {
   if (prevWeekTotal > 0) {
     const diff = ((thisWeekTotal - prevWeekTotal) / prevWeekTotal) * 100;
     return diff > 0 
-      ? `📈 Your spending increased by ${diff.toFixed(0)}% this week.`
-      : `📉 Great job! You spent ${Math.abs(diff).toFixed(0)}% less than last week.`;
+      ? `📈 Your spending increased by ₹{diff.toFixed(0)}% this week.`
+      : `📉 Great job! You spent ₹{Math.abs(diff).toFixed(0)}% less than last week.`;
   }
 
   return "You're off to a great start tracking your shared costs!";
